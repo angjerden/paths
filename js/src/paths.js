@@ -1,6 +1,6 @@
 let Paths = {
-    rows: 4,
-    cols: 4,
+    rows: 3,
+    cols: 3,
     nodes: [],
     start: undefined,
     finish: undefined,
@@ -15,6 +15,7 @@ let Paths = {
     search: function(node) {
         if (node.id === this.finish.id) {
             this.printPath();
+            Draw.drawPath(this.rows, this.cols, this.path);
             this.numPaths++;
             return;
         }
@@ -36,7 +37,7 @@ let Paths = {
         console.log(statement);
     },
     generateNodes: function() {
-        let nodecounter = 1;
+        let nodecounter = 0;
 
         //generating nodes
         for (let i = 0; i < this.rows; i++) {
@@ -74,5 +75,3 @@ let Paths = {
         this.finish = this.nodes[this.rows-1][this.cols-1];
     }
 };
-
-Paths.startSearch();
