@@ -1,3 +1,5 @@
+"use strict";
+
 let Paths = {
     rows: 3,
     cols: 3,

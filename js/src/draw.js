@@ -1,3 +1,5 @@
+"use strict";
+
 let Draw = {
     rectX: 0,
     rectY: 0,
