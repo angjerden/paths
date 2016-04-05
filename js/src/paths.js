@@ -1,23 +1,52 @@
 "use strict";
 
 let Paths = {
-    rows: 3,
-    cols: 3,
+    rows: undefined,
+    cols: undefined,
     nodes: [],
     start: undefined,
     finish: undefined,
     path: [],
     numPaths: 0,
+    maxBounds: 6,
+    init: function() {
+        let that = this;
+        jQuery("#rowInput").change(function(e) {
+            that.rows = parseInt(e.target.value) + 1;
+            that.startSearch();
+        });
+        jQuery("#colInput").change(function(e) {
+            that.cols = parseInt(e.target.value) + 1;
+            that.startSearch();
+        });
+
+        this.rows = parseInt(jQuery("#rowInput").val()) + 1;
+        this.cols = parseInt(jQuery("#colInput").val()) + 1;
+
+        this.startSearch();
+    },
+    resetValues: function() {
+        this.nodes = [];
+        this.start = undefined;
+        this.finish = undefined;
+        this.path = [];
+        this.numPaths = 0;
+    },
     startSearch: function() {
+        Draw.clear();
+        this.resetValues();
         this.generateNodes();
         this.path.push(Paths.start);
         this.search(Paths.start);
         console.log("The number of paths is " + Paths.numPaths);
+        jQuery("#result").html(Paths.numPaths);
     },
     search: function(node) {
         if (node.id === this.finish.id) {
-            this.printPath();
-            Draw.drawPath(this.rows, this.cols, this.path);
+            //this.printPath();
+            if (this.rows < this.maxBounds && this.cols < this.maxBounds) {
+                Draw.drawPath(this.rows, this.cols, this.path);
+            }
             this.numPaths++;
             return;
         }

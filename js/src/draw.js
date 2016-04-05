@@ -12,6 +12,11 @@ let Draw = {
     numCanvases: 0,
     numCanvasRows: 0,
     canvasesPerRow: 3,
+    clear: function() {
+        jQuery("#canvasTable").html("");
+        this.numCanvases = 0;
+        this.numCanvasRows = 0;
+    },
     drawGrid: function(rows, cols, cx) {
         rows--; //number of blocks will be one less than number of nodes
         cols--;
